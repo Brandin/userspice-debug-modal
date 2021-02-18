@@ -1,8 +1,8 @@
 # Debug Modal Plugin for UserSpice
 
-This plugin will append a Debug Hyperlink to your Footer on localhost that allows you to see some quick data useful for debugging, including Session Data, User Data, the $abs_us_root and the $us_url_root.
+This plugin will append a Debug Hyperlink to your Footer on localhost that allows you to see some quick data useful for debugging, including Session Data, User Data, the `abs_us_root` and the `us_url_root`.
 
-UserSpice can be downloaded from their [website](https://userspice.com/) or on [GitHub](https://github.com/mudmin/UserSpice5)
+UserSpice can be downloaded from their [website](https://userspice.com/) or on [GitHub](https://github.com/mudmin/UserSpice5).
 
 ## Setting Up
 
