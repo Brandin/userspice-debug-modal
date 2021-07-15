@@ -17,6 +17,11 @@
             <a href="<?php echo $us_url_root; ?>usersc/plugins/localhostlogin/files/index.php" class="btn btn-sm btn-secondary" id="DebugModal_LocalhostLogin">Localhost Login</a>
           </p>
         <?php } ?>
+        <?php if ($user->isLoggedIn() && hasPerm(2)) { ?>
+          <p>
+            <a href="<?php echo $us_url_root; ?>users/admin.php" class="btn btn-sm btn-secondary" id="DebugModal_ACPLink">Admin Panel</a>
+          </p>
+        <?php } ?>
         <h5>Session</h5>
         <p id="DebugModal_session_destroy_parent"><button class="btn btn-sm btn-danger" id="DebugModal_session_destroy" onclick="DebugModal_destroySession()">Destroy Session</button></p>
         <?php dump($_SESSION); ?>
