@@ -9,12 +9,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <h5>Toggles</h5>
         <p>
-          <button class="btn btn-sm btn-secondary" id="auto_open_debug" onclick="autoOpenToggle()">Auto-Open Debug On Page Load</button>
+          <button class="btn btn-sm btn-secondary" id="DebugModal_auto_open_debug" onclick="DebugModal_autoOpenToggle()">Auto-Open Debug On Page Load</button>
         </p>
+        <?php if (!$user->isLoggedIn() && pluginActive('localhostlogin', true)) { ?>
+          <p>
+            <a href="<?php echo $us_url_root; ?>usersc/plugins/localhostlogin/files/index.php" class="btn btn-sm btn-secondary" id="DebugModal_LocalhostLogin">Localhost Login</a>
+          </p>
+        <?php } ?>
         <h5>Session</h5>
-        <p id="session_destroy_parent"><button class="btn btn-sm btn-danger" id="session_destroy" onclick="destroySession()">Destroy Session</button></p>
+        <p id="DebugModal_session_destroy_parent"><button class="btn btn-sm btn-danger" id="DebugModal_session_destroy" onclick="DebugModal_destroySession()">Destroy Session</button></p>
         <?php dump($_SESSION); ?>
         <h5>POST</h5>
         <?php dump($_POST); ?>
@@ -35,18 +39,18 @@
 <script>
 window.addEventListener('load', function () {
   document.querySelector('footer').innerHTML = document.querySelector('footer').innerHTML.replace("</p>"," | <a href='#' data-toggle='modal' data-target='#debugmodal'>Debug</a></p>");
-  var autoOpen = localStorage.getItem('auto_open_debug');
-  updateOpenToggleButton(autoOpen);
+  var autoOpen = localStorage.getItem('DebugModal_auto_open_debug');
+  DebugModal_updateOpenToggleButton(autoOpen);
   if(autoOpen == 'enabled') {
     $("#debugmodal").modal()
   }
 });
 
-function autoOpenToggle() {
-  var autoOpen = localStorage.getItem('auto_open_debug');
+function DebugModal_autoOpenToggle() {
+  var autoOpen = localStorage.getItem('DebugModal_auto_open_debug');
   if(!autoOpen) {
-    localStorage.setItem('auto_open_debug', "disabled");
-    autoOpen = localStorage.getItem('auto_open_debug');
+    localStorage.setItem('DebugModal_auto_open_debug', "disabled");
+    autoOpen = localStorage.getItem('DebugModal_auto_open_debug');
   }
 
   if(autoOpen == "disabled") {
@@ -55,31 +59,31 @@ function autoOpenToggle() {
     autoOpen = "disabled";
   }
 
-  localStorage.setItem('auto_open_debug', autoOpen);
-  autoOpen = localStorage.getItem('auto_open_debug');
-  updateOpenToggleButton(autoOpen);
+  localStorage.setItem('DebugModal_auto_open_debug', autoOpen);
+  autoOpen = localStorage.getItem('DebugModal_auto_open_debug');
+  DebugModal_updateOpenToggleButton(autoOpen);
   return;
 }
 
-function updateOpenToggleButton(state) {
+function DebugModal_updateOpenToggleButton(state) {
   if(state == 'enabled') {
-    document.getElementById('auto_open_debug').classList.replace('btn-secondary', 'btn-success');
+    document.getElementById('DebugModal_auto_open_debug').classList.replace('btn-secondary', 'btn-success');
   }
   if(state == 'disabled') {
-    document.getElementById('auto_open_debug').classList.replace('btn-success', 'btn-secondary');
+    document.getElementById('DebugModal_auto_open_debug').classList.replace('btn-success', 'btn-secondary');
   }
 
   return;
 }
 
-function destroySession() {
-  fetch('//<?="{$_SERVER['HTTP_HOST']}{$us_url_root}usersc/plugins/debugmodal/files/destroy_session.php"; ?>')
+function DebugModal_destroySession() {
+  fetch('//<?php echo "{$_SERVER['HTTP_HOST']}{$us_url_root}usersc/plugins/debugmodal/files/destroy_session.php"; ?>')
   .then(response => response.json())
   .then(data => {
     if(data == 'success') {
       location.reload();
     } else {
-      document.getElementById('session_destroy_parent').innerHTML = document.getElementById('session_destroy_parent').innerHTML + '<p id="session_destroy_warning_text">There was an error destroying the session</p>';
+      document.getElementById('DebugModal_session_destroy_parent').innerHTML = document.getElementById('DebugModal_session_destroy_parent').innerHTML + '<p id="DebugModal_session_destroy_warning_text">There was an error destroying the session</p>';
     }
   });
 }

@@ -3,9 +3,9 @@
   <name>Debug Modal</name>
   <author>Brandin Arsenault</author>
   <website>https://github.com/brandinarsenault/userspice-debug-modal</website>
-  <version>1.0.3</version>
-  <release>February 24, 2021</release>
-  <tested>5.2.5</tested>
+  <version>1.0.4</version>
+  <release>July 15, 2021</release>
+  <tested>5.3.3</tested>
   <description>This plugin will append a Debug Hyperlink to your Footer on localhost that allows you to see some quick data useful for debugging, including Session Data, User Data, the $abs_us_root and the $us_url_root.</description>
   <button></button>
 </plugin>
