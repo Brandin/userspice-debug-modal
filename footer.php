@@ -17,7 +17,7 @@
             <a href="<?php echo $us_url_root; ?>usersc/plugins/localhostlogin/files/index.php" class="btn btn-sm btn-secondary" id="DebugModal_LocalhostLogin">Localhost Login</a>
           </p>
         <?php } ?>
-        <?php if ($user->isLoggedIn() && hasPerm(2)) { ?>
+        <?php if ($user->isLoggedIn() && hasPerm(2) && currentPage() != 'admin.php') { ?>
           <p>
             <a href="<?php echo $us_url_root; ?>users/admin.php" class="btn btn-sm btn-secondary" id="DebugModal_ACPLink">Admin Panel</a>
           </p>
